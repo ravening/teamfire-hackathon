@@ -1,8 +1,13 @@
 import requests
 import json
+import os
+import logging
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
 
 # Configuration
-API_KEY = ""
+API_KEY = os.environ.get('API_KEY')
 ENDPOINT = "https://teamfireopenapi.openai.azure.com/openai/deployments/teamfiredeployment01/chat/completions?api-version=2024-02-15-preview"
 
 def chat_with_ai(client_input):
@@ -24,7 +29,7 @@ def chat_with_ai(client_input):
         ],
         "temperature": 0.7,
         "top_p": 0.95,
-        "max_tokens": 800
+        "max_tokens": 2000
     }
 
     try:
