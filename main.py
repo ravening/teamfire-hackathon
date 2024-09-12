@@ -7,6 +7,7 @@ import backend.aimodel.chat as chat
 import logging
 import requests
 import cosmos
+from customerdata import populate_customer_data
 
 
 logger = logging.getLogger(__name__)
@@ -30,8 +31,10 @@ async def index(request: Request):
 
 @app.get("/customer/{id}")
 async def get_customer_by_id(id: str):
-    logger.info('Fetching customer details')
-    return cosmos.get_customer_by_id(id=id)
+    logger.error('Fetching customer details')
+    response = cosmos.get_customer_by_id(id=id)
+    populate_customer_data(response[0])
+    return response
 
 
 @app.get('/favicon.ico')
