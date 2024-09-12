@@ -3,7 +3,12 @@ from fastapi.responses import HTMLResponse, FileResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 import uvicorn
+import backend.aimodel.chat as chat
+import logging
+import requests
 
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
@@ -11,8 +16,8 @@ templates = Jinja2Templates(directory="templates")
 
 @app.get("/", response_class=HTMLResponse)
 async def index(request: Request):
-    print('Request for index page received')
     return templates.TemplateResponse('index.html', {"request": request})
+
 
 @app.get('/favicon.ico')
 async def favicon():
@@ -23,7 +28,7 @@ async def favicon():
 @app.post('/hello', response_class=HTMLResponse)
 async def hello(request: Request, name: str = Form(...)):
     if name:
-        print('Request for hello page received with name=%s' % name)
+        name = chat.chat_with_ai(name)
         return templates.TemplateResponse('hello.html', {"request": request, 'name':name})
     else:
         print('Request for hello page received with no name or blank name -- redirecting')

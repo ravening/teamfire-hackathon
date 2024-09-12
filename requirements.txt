@@ -4,5 +4,3 @@ gunicorn
 jinja2
 python-multipart
 openai
-torch
-transformers

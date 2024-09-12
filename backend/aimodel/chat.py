@@ -2,8 +2,6 @@ import requests
 import json
 from sentiment import SentimentAnalyzer
 
-# API Key and endpoint staff here
-API_KEY = "184d81fd91524465a04f92da38d4222b"
 ENDPOINT = "https://teamfireopenapi.openai.azure.com/openai/deployments/teamfiredeployment01/chat/completions?api-version=2024-02-15-preview"
 
 sentiment_analyzer = SentimentAnalyzer()
@@ -31,7 +29,7 @@ def chat_with_ai(client_input):
         ],
         "temperature": 0.7,
         "top_p": 0.95,
-        "max_tokens": 800
+        "max_tokens": 2000
     }
     try:
         response = requests.post(ENDPOINT, headers=headers, json=payload)
