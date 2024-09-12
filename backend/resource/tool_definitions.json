@@ -1,0 +1,42 @@
+{
+    "toolscollection": [
+      {
+        "type": "function",
+        "function": {
+          "name": "get_transactions",
+          "description": "Use this to get information about the users transactions or bank account",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "days": {
+                "type": "integer",
+                "description": "No of days for which the information is requested by the user"
+              },
+              "category": {
+                "type": "string",
+                "description": "The category for which the transactions are to be retrieved"
+              }
+            },
+            "required": ["days"]
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "createAppointment",
+          "description": "If user is looking for advice use this to create an appointment at the end of the conversation",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "casedata": {
+                "type": "string",
+                "description": "the summary of your conversation with the user"
+              }
+            },
+            "required": ["casedata"]
+          }
+        }
+      }
+    ]
+  }
