@@ -8,17 +8,16 @@ products:
 - azure-app-service
 ---
 
-# Deploy a Python (FastAPI) web app to Azure App Service - Sample Application
-
-This is the sample FastAPI application for the Azure Quickstart [Deploy a Python (Django, Flask or FastAPI) web app to Azure App Service](https://docs.microsoft.com/en-us/azure/app-service/quickstart-python). For instructions on how to create the Azure resources and deploy the application to Azure, refer to the Quickstart article.
-
-Sample applications are available for the other frameworks here:
-- Django [https://github.com/Azure-Samples/msdocs-python-django-webapp-quickstart](https://github.com/Azure-Samples/msdocs-python-django-webapp-quickstart)
-- Flask [https://github.com/Azure-Samples/msdocs-python-flask-webapp-quickstart](https://github.com/Azure-Samples/msdocs-python-flask-webapp-quickstart)
-
-If you need an Azure account, you can [create one for free](https://azure.microsoft.com/en-us/free/).
 
 ## Local Testing
+
+set all the required env variables in your local machine.
+
+ex:
+
+```
+export API_KEY=<get the key from: app service -> environment variables>
+```
 
 To try the application on your local machine:
 
@@ -34,6 +33,9 @@ To try the application on your local machine:
 
 http://127.0.0.1:8000/
 
-## Next Steps
 
-To learn more about FastAPI, see [FastAPI](https://fastapi.tiangolo.com/).
+# Deploy on azure
+
+Follow the steps mentioned in wiki: 
+
+https://learn.microsoft.com/en-us/azure/app-service/quickstart-python?tabs=fastapi%2Cmac-linux%2Cazure-cli%2Czip-deploy%2Cdeploy-instructions-azcli%2Cterminal-powershell%2Cdeploy-instructions-zip-curl#4---configure-startup-script

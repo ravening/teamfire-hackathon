@@ -28,6 +28,12 @@ async def index(request: Request):
     return cosmos.data()
 
 
+@app.get("/customer/{id}")
+async def get_customer_by_id(id: str):
+    logger.info('Fetching customer details')
+    return cosmos.get_customer_by_id(id=id)
+
+
 @app.get('/favicon.ico')
 async def favicon():
     file_name = 'favicon.ico'

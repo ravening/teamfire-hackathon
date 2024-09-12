@@ -18,3 +18,12 @@ def data():
     query = "SELECT * FROM c"
     items = list(container.query_items(query=query, enable_cross_partition_query=True))
     return (items)
+
+
+def get_customer_by_id(id):
+    query = f"SELECT * FROM c WHERE c.id = '{id}'"
+    items = list(container.query_items(query=query, enable_cross_partition_query=True))
+    if items:
+        return items
+    else:
+        return "Customer not found"
