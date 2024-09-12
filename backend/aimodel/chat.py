@@ -8,7 +8,7 @@ logger.setLevel(logging.DEBUG)
 
 # Configuration
 API_KEY = os.environ.get('API_KEY')
-ENDPOINT = "https://teamfireopenapi.openai.azure.com/openai/deployments/teamfiredeployment01/chat/completions?api-version=2024-02-15-preview"
+ENDPOINT = os.environ.get('API_ENDPOINT')
 
 def chat_with_ai(client_input):
     headers = {
