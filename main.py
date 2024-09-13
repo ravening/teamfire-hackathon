@@ -8,7 +8,10 @@ import logging
 import requests
 import cosmos
 from customerdata import populate_customer_data
+from conversation import chat_with_ai
 
+
+customer_data = ''
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
@@ -31,8 +34,10 @@ async def index(request: Request):
 
 @app.get("/customer/{id}")
 async def get_customer_by_id(id: str):
+    global customer_data
     logger.error('Fetching customer details')
     response = cosmos.get_customer_by_id(id=id)
+    customer_data = response[0]
     populate_customer_data(response[0])
     return response
 
@@ -46,12 +51,24 @@ async def favicon():
 
 @app.post('/hello', response_class=HTMLResponse)
 async def hello(request: Request, name: str = Form(...)):
+    global customer_data
     if name:
-        name = chat.chat_with_ai(name)
+        logger.error(f"getting the request: {name}")
+        name = chat_with_ai("unique_conversation_id", name)
         return templates.TemplateResponse('hello.html', {"request": request, 'name':name})
     else:
         print('Request for hello page received with no name or blank name -- redirecting')
         return RedirectResponse(request.url_for("index"), status_code=status.HTTP_302_FOUND)
+
+
+# @app.post('/hello', response_class=HTMLResponse)
+# async def hello(request: Request, name: str = Form(...)):
+#     if name:
+#         name = chat.chat_with_ai(name)
+#         return templates.TemplateResponse('hello.html', {"request": request, 'name':name})
+#     else:
+#         print('Request for hello page received with no name or blank name -- redirecting')
+#         return RedirectResponse(request.url_for("index"), status_code=status.HTTP_302_FOUND)
 
 
 if __name__ == '__main__':
